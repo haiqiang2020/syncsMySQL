@@ -1,0 +1,75 @@
+server:
+    port: 8080
+    servlet:
+       context-path: /test-demo
+       compression:
+         enabled: true
+         mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,text/css,image/*
+
+management:
+ endpoints:
+  web:
+   exposure:
+    include: metrics,httptrace
+
+spring:
+  ## quartz��ʱ����,�������ݿⷽʽ
+  quartz:
+     job-store-type: jdbc
+  #json ʱ���ͳһת��
+  jackson:
+    date-format:   yyyy-MM-dd HH:mm:ss
+    time-zone:   GMT+8
+
+  # ���þ�̬�ļ�·����js,css��
+  mvc:
+    static-path-pattern: /**
+  resource:
+    static-locations: classpath:/static/,classpath:/public/
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+#  datasource:
+#    druid:
+#      stat-view-servlet:
+#        loginUsername: admin
+#        loginPassword: 123456
+#    dynamic:
+#      druid: # ȫ��druid���������󲿷�ֵ��Ĭ�ϱ���һ�¡�(����֧�ֵĲ�������,��������岻Ҫ������)
+#        # ���ӳص�������Ϣ
+#        # ��ʼ����С����С�����
+#        initial-size: 5
+#        min-idle: 5
+#        maxActive: 20
+#        # ���û�ȡ���ӵȴ���ʱ��ʱ��
+#        maxWait: 60000
+#        # ���ü����òŽ���һ�μ�⣬�����Ҫ�رյĿ������ӣ���λ�Ǻ���
+#        timeBetweenEvictionRunsMillis: 60000
+#        # ����һ�������ڳ�����С�����ʱ�䣬��λ�Ǻ���
+#        minEvictableIdleTimeMillis: 300000
+#        validationQuery: SELECT 1 FROM DUAL
+#        testWhileIdle: true
+#        testOnBorrow: false
+#        testOnReturn: false
+#        # ��PSCache������ָ��ÿ��������PSCache�Ĵ�С
+#        poolPreparedStatements: true
+#        maxPoolPreparedStatementPerConnectionSize: 20
+#        # ���ü��ͳ�����ص�filters��ȥ�����ؽ���sql�޷�ͳ�ƣ�'wall'���ڷ���ǽ
+#        filters: stat,wall,slf4j
+#        # ͨ��connectProperties��������mergeSql���ܣ���SQL��¼
+#        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+#      datasource:
+#          master:
+#            url: jdbc:mysql://127.0.0.1:3306/jtis_boot?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
+#            username: root
+#            password: root
+#            driver-class-name: com.mysql.jdbc.Driver
+#          # ������Դ����
+#          #multi-datasource1:
+#            #url: jdbc:mysql://localhost:3306/jeecg-boot2?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
+#            #username: root
+#            #password: root
+#            #driver-class-name: com.mysql.jdbc.Driver
+#
+###mybatis plus ����
+#mybatis-plus:
+#   mapper-locations: classpath*:com/yhq/demotest/**/xml/*Mapper.xml

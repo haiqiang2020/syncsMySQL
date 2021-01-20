@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <source>
+        <url>jdbc:mysql://127.0.0.1:3306/cool_db</url>
+        <username>root</username>
+        <password>root</password>
+        <dbtype>mysql</dbtype>
+        <driver>com.mysql.jdbc.Driver</driver>
+    </source>
+
+    <dest>
+        <url>jdbc:mysql://127.0.0.1:3306/sync</url>
+        <username>root</username>
+        <password>root</password>
+        <dbtype>mysql</dbtype>
+        <driver>com.mysql.jdbc.Driver</driver>
+    </dest>
+
+    <!--sql查询表的字段，用逗号隔开，destTableFields的方便来源-->
+    <!--SELECT GROUP_CONCAT(DISTINCT COLUMN_NAME ORDER BY ordinal_position) FROM information_schema.COLUMNS WHERE table_name = 'sys_depart'-->
+
+
+    <jobs>
+        <job>
+            <tableName>sys_user</tableName>
+            <sql>select id,username,realname,password,salt,avatar,birthday,sex,email,phone,org_code,status,del_flag,activiti_sync,create_by,create_time,update_by,update_time,sort_no,position from sys_user</sql>
+            <destTableKey>id</destTableKey>
+            <destTableFields>
+                id,username,realname,password,salt,avatar,birthday,sex,email,phone,org_code,status,del_flag,activiti_sync,create_by,create_time,update_by,update_time,sort_no,position
+            </destTableFields>
+            <destTableUpdata>
+                username,realname,password,salt,avatar,birthday,sex,email,phone,org_code,status,del_flag,activiti_sync,create_by,create_time,update_by,update_time,sort_no,position
+            </destTableUpdata>
+        </job>
+        <job>
+            <tableName>sys_user_management_depart</tableName>
+            <sql>select id,user_id,dep_id from sys_user_management_depart</sql>
+            <destTableKey>id</destTableKey>
+            <destTableFields>
+                id,user_id,dep_id
+            </destTableFields>
+            <destTableUpdata>
+                user_id,dep_id
+            </destTableUpdata>
+        </job>
+        <job>
+            <tableName>sys_depart</tableName>
+            <sql>select id,parent_id,depart_name,depart_name_en,depart_name_abbr,depart_order,description,org_type,org_code,mobile,project_type,fax,address,picture,memo,status,del_flag,create_by,create_time,update_by,update_time,state from sys_depart</sql>
+            <destTableKey>id</destTableKey>
+            <destTableFields>
+                id,parent_id,depart_name,depart_name_en,depart_name_abbr,depart_order,description,org_type,org_code,mobile,project_type,fax,address,picture,memo,status,del_flag,create_by,create_time,update_by,update_time,state
+            </destTableFields>
+            <destTableUpdata>
+                parent_id,depart_name,depart_name_en,depart_name_abbr,depart_order,description,org_type,org_code,mobile,project_type,fax,address,picture,memo,status,del_flag,create_by,create_time,update_by,update_time,state
+            </destTableUpdata>
+        </job>
+        <job>
+            <tableName>sys_sms</tableName>
+            <sql>select id,es_title,es_type,es_receiver,es_param,es_content,es_send_time,es_send_status,es_send_num,es_result,es_method,org_code,remark,create_by,create_time,update_by,update_time,u_key from sys_sms</sql>
+            <destTableKey>id</destTableKey>
+            <destTableFields>
+                id,es_title,es_type,es_receiver,es_param,es_content,es_send_time,es_send_status,es_send_num,es_result,es_method,org_code,remark,create_by,create_time,update_by,update_time,u_key
+            </destTableFields>
+            <destTableUpdata>
+                es_title,es_type,es_receiver,es_param,es_content,es_send_time,es_send_status,es_send_num,es_result,es_method,org_code,remark,create_by,create_time,update_by,update_time,u_key
+            </destTableUpdata>
+        </job>
+        <job>
+            <tableName>sys_sms_template</tableName>
+            <sql>select id,template_name,template_code,template_type,template_content,template_test_json,create_time,create_by,update_time,update_by from sys_sms_template</sql>
+            <destTableKey>id</destTableKey>
+            <destTableFields>
+                id,template_name,template_code,template_type,template_content,template_test_json,create_time,create_by,update_time,update_by
+            </destTableFields>
+            <destTableUpdata>
+                template_name,template_code,template_type,template_content,template_test_json,create_time,create_by,update_time,update_by
+            </destTableUpdata>
+        </job>
+        <job>
+            <tableName>sys_dict</tableName>
+            <sql>select id,dict_name,dict_code,description,del_flag,create_by,create_time,update_by,update_time,type from sys_dict</sql>
+            <destTableKey>id</destTableKey>
+            <destTableFields>
+                id,dict_name,dict_code,description,del_flag,create_by,create_time,update_by,update_time,type
+            </destTableFields>
+            <destTableUpdata>
+                dict_name,dict_code,description,del_flag,create_by,create_time,update_by,update_time,type
+            </destTableUpdata>
+        </job>
+        <job>
+            <tableName>sys_dict_item</tableName>
+            <sql>select id,dict_id,item_text,item_value,description,sort_order,status,create_by,create_time,update_by,update_time from sys_dict_item</sql>
+            <destTableKey>id</destTableKey>
+            <destTableFields>
+                id,dict_id,item_text,item_value,description,sort_order,status,create_by,create_time,update_by,update_time
+            </destTableFields>
+            <destTableUpdata>
+                dict_id,item_text,item_value,description,sort_order,status,create_by,create_time,update_by,update_time
+            </destTableUpdata>
+        </job>
+
+    </jobs>
+
+</root>
